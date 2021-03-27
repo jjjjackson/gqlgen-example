@@ -17,11 +17,20 @@
   docker-compose exec gqlgen-example go run database/seed/main.go
 ```
 
+
+## Development 🛠
+
+#### Installation
+```sh
+# code quality
+brew install pre-commit golangci-lint
+brew upgrade golangci-lint
+pre-commit autoupdate
+```
 ## Todo
 - [ ] Docker Compose
   - [ ] app server
   - [ ] postgres server
 - [ ] migration
-- [ ] sample app  
+- [ ] sample app
 ...
-

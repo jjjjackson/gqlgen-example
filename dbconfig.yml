@@ -9,4 +9,3 @@ development:
   datasource: ${DB_URL}
   dir: database/migration
   table: migrations
-  
