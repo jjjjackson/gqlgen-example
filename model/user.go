@@ -5,7 +5,7 @@ import (
 
 	"github.com/google/uuid"
 
-	"github.com/jjjjackson/gqlgen-example/helper/token"
+	"github.com/jjjjackson/gqlgen-example/util/token"
 	"github.com/pkg/errors"
 	"golang.org/x/crypto/bcrypt"
 )
