@@ -1,0 +1,12 @@
+production:
+  dialect: postgres
+  datasource: ${DB_URL}
+  dir: database/migration
+  table: migrations
+
+development:
+  dialect: postgres
+  datasource: ${DB_URL}
+  dir: database/migration
+  table: migrations
+  
