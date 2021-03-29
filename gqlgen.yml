@@ -1,17 +1,17 @@
 schema:
-  - schema/*.graphqls
+  - presentation/schema/*.graphqls
 exec:
   filename: graphql/generated/generated.go
   package: generated
 model:
-  filename: model/models_gen.go
-  package: model
+  filename: presentation/iotype/iotype_gen.go
+  package: iotype
 resolver:
   layout: follow-schema
-  dir: resolver
+  dir: presentation/resolver
   package: resolver
 autobind:
-  - "github.com/jjjjackson/gqlgen-example/model"
+  - "github.com/jjjjackson/gqlgen-example/domain/model"
 models:
   ID:
     model:
@@ -26,4 +26,4 @@ models:
       - github.com/99designs/gqlgen/graphql.Int32
   User:
     model:
-      - github.com/jjjjackson/gqlgen-example/model.User
+      - github.com/jjjjackson/gqlgen-example/domain/model.User

@@ -6,32 +6,33 @@ package resolver
 import (
 	"context"
 
+	"github.com/jjjjackson/gqlgen-example/domain/model"
 	"github.com/jjjjackson/gqlgen-example/graphql/generated"
-	"github.com/jjjjackson/gqlgen-example/model"
-	"github.com/jjjjackson/gqlgen-example/repository"
-	"github.com/jjjjackson/gqlgen-example/service"
+	"github.com/jjjjackson/gqlgen-example/infrastructure/datastore"
+	"github.com/jjjjackson/gqlgen-example/presentation/iotype"
+	"github.com/jjjjackson/gqlgen-example/usecase"
 )
 
-func (r *mutationResolver) CreateUser(ctx context.Context, input model.NewUser) (*model.User, error) {
-	userService := service.NewUserService(
+func (r *mutationResolver) CreateUser(ctx context.Context, input iotype.CreateUserInput) (*model.User, error) {
+	userService := usecase.NewUserService(
 		r.DB,
-		repository.NewUserRepository(),
+		datastore.NewUserRepository(),
 	)
 	return userService.CreateUser(input.Email, input.Password)
 }
 
 func (r *queryResolver) Users(ctx context.Context) ([]*model.User, error) {
-	userService := service.NewUserService(
+	userService := usecase.NewUserService(
 		r.DB,
-		repository.NewUserRepository(),
+		datastore.NewUserRepository(),
 	)
 	return userService.ListUsers()
 }
 
 func (r *queryResolver) User(ctx context.Context, email string) (*model.User, error) {
-	userService := service.NewUserService(
+	userService := usecase.NewUserService(
 		r.DB,
-		repository.NewUserRepository(),
+		datastore.NewUserRepository(),
 	)
 	return userService.GetUser(email)
 }

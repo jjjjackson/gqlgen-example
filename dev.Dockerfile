@@ -6,7 +6,6 @@ WORKDIR /go/src/github.com/jjjjackson/gqlgen-example
 
 COPY . /go/src/github.com/jjjjackson/gqlgen-example
 
-
 ENV GO111MODULE=off
 
 RUN go get -u github.com/rubenv/sql-migrate/...

@@ -7,13 +7,13 @@ type User {
   updatedAt: String!
 }
 
-input NewUser {
+input CreateUserInput {
   email: String!
   password: String!
 }
 
 type Mutation {
-  createUser(input: NewUser!): User!
+  createUser(input: CreateUserInput!): User!
 }
 
 type Query {

@@ -4,10 +4,9 @@ import (
 	"time"
 
 	"github.com/google/uuid"
+	"github.com/jjjjackson/gqlgen-example/util"
 
-	"github.com/jjjjackson/gqlgen-example/util/token"
 	"github.com/pkg/errors"
-	"golang.org/x/crypto/bcrypt"
 )
 
 const (
@@ -18,7 +17,7 @@ const (
 type UserList []User
 
 type User struct {
-	UID       string `gorm:"primary_key;column:uid" json:uid`
+	UID       string `gorm:"primary_key;column:uid" json:"uid"`
 	Email     string
 	Password  string    `json:"-"`
 	Salt      string    `json:"-"`
@@ -26,13 +25,13 @@ type User struct {
 	UpdatedAt time.Time `json:"-"`
 }
 
-func CreateUser(email, password string) (*User, error) {
+func NewUser(email, password string) (*User, error) {
 	uid, err := uuid.NewRandom()
 	if err != nil {
 		return nil, errors.WithStack(err)
 	}
 
-	encryptedPassword, err := encryptPassword(password)
+	encryptedPassword, err := util.EncryptPassword(password)
 	if err != nil {
 		return nil, errors.WithStack(err)
 	}
@@ -41,25 +40,10 @@ func CreateUser(email, password string) (*User, error) {
 		UID:      uid.String(),
 		Email:    email,
 		Password: encryptedPassword,
-		Salt:     token.GenerateToken(saltSize),
+		Salt:     util.RandomString(saltSize),
 	}, nil
 }
 
 func (u *User) MaskPassword() {
 	u.Password = passwordMask
-}
-
-func encryptPassword(password string) (string, error) {
-
-	hash, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
-	if err != nil {
-		return "", err
-	}
-
-	return string(hash), nil
-}
-
-func checkPassword(password, hash string) bool {
-	err := bcrypt.CompareHashAndPassword([]byte(hash), []byte(password))
-	return err == nil
 }

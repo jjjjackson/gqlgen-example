@@ -1,4 +1,4 @@
-package token
+package util
 
 import (
 	"math/rand"
@@ -6,7 +6,7 @@ import (
 
 var letters = []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789")
 
-func GenerateToken(size int) string {
+func RandomString(size int) string {
 	// TODO: make sure there are at least 1 number, 1 uppercast 1 and lowercaset in string
 	result := make([]rune, size)
 	for i := range result {
